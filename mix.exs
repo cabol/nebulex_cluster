@@ -34,20 +34,18 @@ defmodule NebulexCluster.MixProject do
 
   defp deps do
     [
-      {:nebulex, github: "cabol/nebulex", branch: "master"},
+      {:nebulex, "~> 1.1", optional: true},
 
       # Test
-      {:excoveralls, "~> 0.6", only: :test},
-      {:benchee, "~> 0.13", optional: true, only: :dev},
-      {:benchee_html, "~> 0.5", optional: true, only: :dev},
+      {:excoveralls, "~> 0.11", only: :test},
 
       # Code Analysis
       {:dialyxir, "~> 0.5", optional: true, only: [:dev, :test], runtime: false},
-      {:credo, "~> 0.10", optional: true, only: [:dev, :test]},
+      {:credo, "~> 1.0", optional: true, only: [:dev, :test]},
 
       # Docs
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:inch_ex, "~> 0.5", only: :docs}
+      {:ex_doc, "~> 0.20", only: :dev, runtime: false},
+      {:inch_ex, "~> 2.0", only: :docs}
     ]
   end
 

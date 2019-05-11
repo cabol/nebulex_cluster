@@ -1,15 +1,19 @@
 # NebulexCluster
-> ### Cluster handling utilities for external Nebulex adapters.
+> Cluster handling utilities for external Nebulex adapters.
 
-This project is specially for those adapters that want to provide cluster
+[![Build Status](https://travis-ci.org/cabol/nebulex_cluster.svg?branch=master)](https://travis-ci.org/cabol/nebulex_cluster)
+[![Coverage Status](https://coveralls.io/repos/github/cabol/nebulex_cluster/badge.svg?branch=master)](https://coveralls.io/github/cabol/nebulex_cluster?branch=master)
+[![Hex Version](https://img.shields.io/hexpm/v/nebulex_cluster.svg)](https://hex.pm/packages/nebulex_cluster)
+[![Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/nebulex_cluster)
+
+This project is especially for those adapters that want to provide cluster
 support in a very simple way based on sharding distribution model. For example,
 for Redis and Memcached adapters, we can provide multiple connection pools
 (connection-pool per node) and client-side sharding on top of them very easy.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `nebulex_cluster` to your list of dependencies in `mix.exs`:
+Add `nebulex_cluster` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -18,6 +22,8 @@ def deps do
   ]
 end
 ```
+
+Then run `mix deps.get` in your shell to fetch the dependencies.
 
 ## Usage
 
