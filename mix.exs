@@ -17,6 +17,8 @@ defmodule NebulexCluster.MixProject do
       # Testing
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
+        credo: :test,
+        dialyzer: :test,
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
@@ -34,18 +36,17 @@ defmodule NebulexCluster.MixProject do
 
   defp deps do
     [
-      {:nebulex, "~> 1.1", optional: true},
+      {:nebulex, github: "cabol/nebulex", optional: true},
 
-      # Test
-      {:excoveralls, "~> 0.11", only: :test},
-
-      # Code Analysis
-      {:dialyxir, "~> 0.5", optional: true, only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.0", optional: true, only: [:dev, :test]},
+      # Test & Code Analysis
+      {:excoveralls, "~> 0.13", only: :test},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.4", only: [:dev, :test]},
+      {:ex_check, "~> 0.12", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.10", only: [:dev, :test], runtime: false},
 
       # Docs
-      {:ex_doc, "~> 0.20", only: :dev, runtime: false},
-      {:inch_ex, "~> 2.0", only: :docs}
+      {:ex_doc, "~> 0.23", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -69,7 +70,8 @@ defmodule NebulexCluster.MixProject do
 
   defp dialyzer do
     [
-      plt_add_apps: [:nebulex, :shards, :mix, :eex],
+      plt_add_apps: [:nebulex],
+      plt_file: {:no_warn, "priv/plts/" <> plt_file_name()},
       flags: [
         :unmatched_returns,
         :error_handling,
@@ -79,5 +81,9 @@ defmodule NebulexCluster.MixProject do
         :no_return
       ]
     ]
+  end
+
+  defp plt_file_name do
+    "dialyzer-#{Mix.env()}-#{System.version()}-#{System.version()}.plt"
   end
 end

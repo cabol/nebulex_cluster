@@ -1,7 +1,7 @@
 # NebulexCluster
 > Cluster handling utilities for external Nebulex adapters.
 
-[![Build Status](https://travis-ci.org/cabol/nebulex_cluster.svg?branch=master)](https://travis-ci.org/cabol/nebulex_cluster)
+![CI](https://github.com/cabol/nebulex_cluster/workflows/CI/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/cabol/nebulex_cluster/badge.svg?branch=master)](https://coveralls.io/github/cabol/nebulex_cluster?branch=master)
 [![Hex Version](https://img.shields.io/hexpm/v/nebulex_cluster.svg)](https://hex.pm/packages/nebulex_cluster)
 [![Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/nebulex_cluster)

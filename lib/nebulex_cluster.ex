@@ -48,9 +48,9 @@ defmodule NebulexCluster do
   @spec group_keys_by_hash_slot(Enum.t(), nodes_config, module) :: map
   def group_keys_by_hash_slot(enum, nodes, module) do
     Enum.reduce(enum, %{}, fn
-      %Nebulex.Object{key: key} = object, acc ->
+      {key, _} = entry, acc ->
         hash_slot = hash_slot(module, key, nodes)
-        Map.put(acc, hash_slot, [object | Map.get(acc, hash_slot, [])])
+        Map.put(acc, hash_slot, [entry | Map.get(acc, hash_slot, [])])
 
       key, acc ->
         hash_slot = hash_slot(module, key, nodes)
@@ -58,13 +58,14 @@ defmodule NebulexCluster do
     end)
   end
 
+  # sobelow_skip ["DOS.BinToAtom"]
   @spec pool_name(Nebulex.Cache.t(), atom) :: atom
   def pool_name(cache, node_name), do: :"#{cache}.#{node_name}"
 
   ## Private Functions
 
   defp get_node(module, nodes, key) do
-    index = module.keyslot(key, length(nodes))
+    index = module.hash_slot(key, length(nodes))
     Enum.at(nodes, index)
   end
 

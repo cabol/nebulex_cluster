@@ -1,6 +1,6 @@
 defmodule NebulexClusterTest do
   use ExUnit.Case
-  use Nebulex.Adapter.HashSlot
+  use Nebulex.Adapter.Keyslot
   doctest NebulexCluster
 
   alias NebulexCluster.TestCache
@@ -41,7 +41,7 @@ defmodule NebulexClusterTest do
   end
 
   test "group_keys_by_hash_slot/3 wirh objects" do
-    objs = for x <- 1000..2000, do: %Nebulex.Object{key: x, value: x}
+    objs = for x <- 1000..2000, do: {x, x}
 
     %{
       {:"$hash_slot", :node1} => node1,

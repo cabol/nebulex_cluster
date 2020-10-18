@@ -5,6 +5,7 @@ defmodule NebulexCluster.Pool do
 
   ## API
 
+  # sobelow_skip ["DOS.BinToAtom"]
   @spec children(module, Keyword.t()) :: [Supervisor.child_spec()]
   def children(module, opts) do
     name = Keyword.fetch!(opts, :name)
@@ -16,9 +17,10 @@ defmodule NebulexCluster.Pool do
     end
   end
 
+  # sobelow_skip ["DOS.BinToAtom"]
   @spec get_conn(atom, pos_integer) :: atom
   def get_conn(name, pool_size) do
-    index = rem(System.unique_integer([:positive]), pool_size)
-    :"#{name}.#{index}"
+    # ensure to select the same connection based on the caller PID
+    :"#{name}.#{:erlang.phash2(self(), pool_size)}"
   end
 end
